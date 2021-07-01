@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Dockerfile指令"><meta name="keywords" content="Linux,Docker,运维"><meta name="author" content="MissGod1"><meta name="copyright" content="MissGod1"><title>Dockerfile指令 | MissGod1's Blog</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aa6bcbd9720e9e146ad51aed35a0c1de";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  hexoVersion: '5.2.0'
+} </script><meta name="generator" content="Hexo 5.2.0"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dockerfile"><span class="toc-number">1.</span> <span class="toc-text"> Dockerfile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E8%A7%A3%E9%87%8A"><span class="toc-number">2.</span> <span class="toc-text"> 指令解释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#from"><span class="toc-number">2.1.</span> <span class="toc-text"> FROM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#copy"><span class="toc-number">2.2.</span> <span class="toc-text"> COPY</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#add"><span class="toc-number">2.3.</span> <span class="toc-text"> ADD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#run"><span class="toc-number">2.4.</span> <span class="toc-text"> RUN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#env"><span class="toc-number">2.5.</span> <span class="toc-text"> ENV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cmd"><span class="toc-number">2.6.</span> <span class="toc-text"> CMD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#expose"><span class="toc-number">2.7.</span> <span class="toc-text"> EXPOSE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#workdir"><span class="toc-number">2.8.</span> <span class="toc-text"> WORKDIR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#volume"><span class="toc-number">2.9.</span> <span class="toc-text"> VOLUME</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/images/avatar.jpg"></div><div class="author-info__name text-center">MissGod1</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">11</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">17</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">7</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">MissGod1's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/about">About</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">Dockerfile指令</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-11-11</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E8%BF%90%E7%BB%B4/">运维</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="dockerfile"><a class="markdownIt-Anchor" href="#dockerfile"></a> Dockerfile</h2>
+<blockquote>
+<p>Dockerfile是一种简单的文本文档，通过预先写好的指令能进行自动化的构建镜像。<br />
+例如：</p>
+</blockquote>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu</span><br></pre></td></tr></table></figure>
+<p>这是一个最简单的Dockerfile文件，以ubuntu为基础镜像构建一个镜像。</p>
+<h2 id="指令解释"><a class="markdownIt-Anchor" href="#指令解释"></a> 指令解释</h2>
+<h3 id="from"><a class="markdownIt-Anchor" href="#from"></a> FROM</h3>
+<blockquote>
+<p>Dockerfile必须有FROM指令，指定构建的基础镜像<br />
+格式：<code>FROM imagename[:version]</code></p>
+</blockquote>
+<h3 id="copy"><a class="markdownIt-Anchor" href="#copy"></a> COPY</h3>
+<blockquote>
+<p>COPY主要就是复制，复制宿主机中指定的文件或者目录到容器中去。格式：<code>COPY &lt;src&gt; &lt;dst&gt;</code></p>
+</blockquote>
+<h3 id="add"><a class="markdownIt-Anchor" href="#add"></a> ADD</h3>
+<blockquote>
+<p>ADD功能同COPY类似，但是在COPY的基础之上，它还支持直接访问远程的源文件，并且对于本地的压缩文件还能自动解包。格式：<code>ADD &lt;src&gt; &lt;dst&gt;</code></p>
+</blockquote>
+<h3 id="run"><a class="markdownIt-Anchor" href="#run"></a> RUN</h3>
+<blockquote>
+<p>顾名思义，RUN就是可以直接执行一些命令，一个Dockerfile可以有多条RUN指令。格式：<code>RUN command</code></p>
+</blockquote>
+<h3 id="env"><a class="markdownIt-Anchor" href="#env"></a> ENV</h3>
+<blockquote>
+<p>ENV为设置环境变量。格式：<code>ENV key value</code></p>
+</blockquote>
+<h3 id="cmd"><a class="markdownIt-Anchor" href="#cmd"></a> CMD</h3>
+<blockquote>
+<p>CMD命令也是执行命令，但是一个Dockerfile中只能有一条CMD指令，多余的指令会被最后一条直接覆盖。同时CMD的指令形势也有三种：</p>
+</blockquote>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">&quot;executable&quot;</span>,<span class="string">&quot;param1&quot;</span>,<span class="string">&quot;param2&quot;</span>] (<span class="built_in">exec</span> form, this is the preferred form)</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">&quot;param1&quot;</span>,<span class="string">&quot;param2&quot;</span>] (as default parameters to ENTRYPOINT)</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> <span class="built_in">command</span> param1 param2 (shell form)</span></span><br></pre></td></tr></table></figure>
+<h3 id="expose"><a class="markdownIt-Anchor" href="#expose"></a> EXPOSE</h3>
+<blockquote>
+<p>该EXPOSE指令通知Docker容器在运行时侦听指定的网络端口。您可以指定端口是侦听TCP还是UDP，如果未指定协议，则默认为TCP。<br />
+该EXPOSE指令实际上没有发布端口。它作为构建映像的人和运行容器的人之间的一种文档，用于发布要发布的端口。要在运行容器时实际发布端口，请使用-p标志on docker run 来发布和映射一个或多个端口，或使用-P标志发布所有公开的端口并将它们映射到高阶端口。<br />
+默认情况下，EXPOSE假定为TCP。您还可以指定UDP：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXPOSE 80&#x2F;udp</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>要在TCP和UDP上公开，请包含两行：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EXPOSE 80&#x2F;tcp</span><br><span class="line">EXPOSE 80&#x2F;udp</span><br></pre></td></tr></table></figure>
+<p>在这种情况下，如果使用-Pwith docker run，端口将为TCP暴露一次，对UDP则暴露一次。请记住，-P在主机上使用短暂的高阶主机端口，因此TCP和UDP的端口不同。<br />
+无论EXPOSE设置如何，您都可以使用-p标志在运行时覆盖它们。例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 80:80&#x2F;tcp -p 80:80&#x2F;udp ...</span><br></pre></td></tr></table></figure>
+<p>要在主机系统上设置端口重定向，请参阅使用-P标志。该docker network命令支持为容器之间的通信创建网络，而无需公开或发布特定端口，因为连接到网络的容器可以通过任何端口相互通信。</p>
+<h3 id="workdir"><a class="markdownIt-Anchor" href="#workdir"></a> WORKDIR</h3>
+<blockquote>
+<p>WORKDIR 指定工作目录</p>
+</blockquote>
+<h3 id="volume"><a class="markdownIt-Anchor" href="#volume"></a> VOLUME</h3>
+<blockquote>
+<p>VOLUME 挂载目录，如需将指定的本地目录挂在到容器中请使用<code>-v</code>参数</p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">MissGod1</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.missgod1.com/2020/11/11/Dockerfile指令/">https://www.missgod1.com/2020/11/11/Dockerfile指令/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.missgod1.com">MissGod1's Blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/Docker/">Docker</a><a class="post-meta__tags" href="/tags/%E8%BF%90%E7%BB%B4/">运维</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/11/11/ssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE/"><i class="fa fa-chevron-left">  </i><span>ssh密钥登录配置</span></a></div><div class="next-post pull-right"><a href="/2020/11/11/Docker%E5%AE%89%E8%A3%85/"><span>Docker安装</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '2c8dc67fb8874a217ae1',
+  clientSecret: 'a2ab994bb8e4fc0b0d8542a6f81e4fec29d36e76',
+  repo: 'missgod1.github.io',
+  owner: 'MissGod1',
+  admin: 'MissGod1',
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN'
+})
+gitalk.render('gitalk-container')</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2020 - 2021 By MissGod1</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/katex.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
